@@ -1908,7 +1908,7 @@ function TogglePermission(permission, entityId) {
     //console.log(status);
     $.ajax({
         type: 'GET',
-        url: '/permissions-toggle',
+        url: '/toggle-permissions',
         data: {entityId: entityId, model: model, permission: permission, status: status},
         success: function (res) {
             if (status == 1) {
@@ -1952,7 +1952,7 @@ $(document).ready(function (e) {
             $($(this).data('target')).find('span.resource-name').html($(this).data('resource-name'));
             $($(this).data('target')).find('#resource_id').attr('value', $(this).data('resource-id'));
 
-            //$($(this).data('target')).modal('toggle');
+            $($(this).data('target')).modal('toggle');
         })
     }
     $('.sidebar-menu').tree();

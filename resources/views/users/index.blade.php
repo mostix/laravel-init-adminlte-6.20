@@ -12,7 +12,7 @@
 @section('header')
     <div class="btn-group pull-right">
         <a class="btn btn-sm {{$active == 1 ? 'btn-success' : 'btn-default'}}" href="?active=1">
-            <i class="fa fa-check-circle"></i> {{ trans_choice('custom.inactive_f', 1) }}
+            <i class="fa fa-check-circle"></i> {{ trans_choice('custom.active_f', 1) }}
         </a>
 
         <a class="btn btn-sm {{$active == 0 ? 'btn-danger' : 'btn-default'}}" href="?active=0">
@@ -56,7 +56,7 @@
                     </button>
                 </div>
                 <div class="col-xs-12 col-md-2">
-                    <a href="{{route('users')}}" class="btn btn-sm btn-default"> {{__('custom.clear')}}</a>
+                    <a href="{{route('admin.users')}}" class="btn btn-sm btn-default"> {{__('custom.clear')}}</a>
                 </div>
             </form>
         </div>
@@ -67,7 +67,7 @@
         <h3 class="box-title">{{__('custom.list_with')}} {{ $plural }}</h3>
         <div class="box-tools pull-right">
             @if (Auth::user()->hasRole('admin'))
-                <a href="{{ route('users.create') }}" class="btn btn-sm btn-success">
+                <a href="{{ route('admin.users.create') }}" class="btn btn-sm btn-success">
                    {{__('custom.add')}} {{$singular}}
                 </a>
             @endif
@@ -116,19 +116,19 @@
                         </td>
                         <td>{{ $user->created_at }}</td>
                         <td>{{ $user->updated_at }}</td>
-                        <td>
-                            <a href="{{route('users.edit',$user->id)}}"
+                        <td class="text-center">
+                            <a href="{{route('admin.users.edit',$user->id)}}"
                                class="btn btn-sm btn-warning"
                                data-toggle="tooltip"
                                title="{{__('custom.edit')}}">
                                 <i class="fa fa-edit"></i>
                             </a>
                             <a href="javascript:;"
-                               class="btn btn-sm btn-danger js-toggle-delete-resource-modal"
+                               class="btn btn-sm btn-danger js-toggle-delete-resource-modal hidden"
                                data-target="#modal-delete-resource"
                                data-resource-id="{{ $user->id }}"
                                data-resource-name="{{ $user->username }}"
-                               data-resource-delete-url="{{route('users.delete',$user->id)}}"
+                               data-resource-delete-url="{{route('admin.users.delete',$user->id)}}"
                                data-toggle="tooltip"
                                title="{{__('custom.delete')}}">
                                 <i class="fa fa-trash"></i>

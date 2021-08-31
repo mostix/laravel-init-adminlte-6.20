@@ -154,6 +154,7 @@ return [
         'password'                 => 'Парола',
         'password_confirm'         => 'Потвърди Парола',
         'password_confirmation'    => 'Потвърди Парола',
+        'must_change_password'      => 'Да се изпрати автоматичен email до потребителя с линк за да въведе паролата си сам',
         'incoming_number'           => 'Входящ',
         'employer_name'             => 'Име или наименование',
         'employer_number'            => 'ЕГН/ЕИК/БУЛСТАТ/ЛНЧ/Ид.Номер',

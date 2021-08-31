@@ -14,9 +14,9 @@ if (!function_exists('currentUser')) {
         if (\Auth::check() && \Auth::user() && \Auth::user() instanceof \App\User) {
             return Auth::user();
         }
-//        else if (Auth::guard('customer')->check() && Auth::guard('customer')->user() instanceof \App\Models\Customers) {
-//            return Auth::guard('customer')->user();
-//        }
+        //else if (Auth::guard('customer')->check() && Auth::guard('customer')->user() instanceof \App\Models\Customers) {
+        //    return Auth::guard('customer')->user();
+        //}
 
         return null;
     }
@@ -33,14 +33,14 @@ if (!function_exists('currentGuard')) {
      */
     function currentGuard()
     {
-        if(\Auth::guard('web')->check() && \Auth::guard('web')->user() instanceof \App\User) {
+        if (\Auth::guard('web')->check() && \Auth::guard('web')->user() instanceof \App\User) {
             return 'web';
         }
-//        else if (Auth::guard('customer')->check() && Auth::guard('customer')->user() instanceof \App\Models\Customers) {
-//            return 'customer';
-//        }
+        //else if (Auth::guard('customer')->check() && Auth::guard('customer')->user() instanceof \App\Models\Customers) {
+        //    return 'customer';
+        //}
 
-        return 'web';
+        return 'user';
     }
 }
 

@@ -12,7 +12,7 @@
 @section('header')
     <ol class="breadcrumb">
         <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> {{__('custom.home')}}</a></li>
-        <li><a href="{{route('users')}}"><i class="fa fa-user"></i> {{ $plural }}</a></li>
+        <li><a href="{{route('admin.users')}}"><i class="fa fa-user"></i> {{ $plural }}</a></li>
         <li class="active">{{__('custom.edit')}} {{ $singular }}</li>
     </ol>
 @endsection
@@ -22,7 +22,7 @@
         <div class="box-header with-border">
             <h3 class="box-title my-2">{{__('custom.add')}} {{ $singular }}</h3>
 
-            <form action="{{ route('users.update', $user->id) }}" method="post" role="form" id="form"
+            <form action="{{ route('admin.users.update', $user->id) }}" method="post" role="form" id="form"
                   class="form-horizontal form-groups-bordered">
                 @csrf
 
@@ -76,7 +76,6 @@
                     </div>
                 </div>
 
-
                 <div class="form-group">
                     <label class="col-sm-3 control-label" for="password">{{ __('validation.attributes.password') }}</label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -116,8 +115,8 @@
 
                 <div class="form-group">
                     <div class="col-md-6 col-md-offset-3">
-                        <button id="save" type="submit" class="btn btn-success">{{ __('custom.button.save') }}</button>
-                        <a href="{{ route('users') }}"  class="btn btn-primary">{{ __('custom.button.cancel') }}</a>
+                        <button id="save" type="submit" class="btn btn-success">{{ __('custom.save') }}</button>
+                        <a href="{{ route('admin.users') }}"  class="btn btn-primary">{{ __('custom.cancel') }}</a>
                     </div>
                 </div>
                 <br/>

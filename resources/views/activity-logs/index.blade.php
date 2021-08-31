@@ -29,20 +29,24 @@
             <form method="GET">
 
                 <div class="col-xs-12 col-md-2">
-                    <input type="text" name="username" placeholder="{{__('validation.attributes.username')}}" class="form-control"
+                    <input type="text" name="username" placeholder="{{__('validation.attributes.username')}}"
+                           class="form-control"
                            value="{{request()->get('username')}}">
                 </div>
 
                 <div class="col-xs-12 col-md-2">
-                    <input type="text" name="email" placeholder="{{__('validation.attributes.email')}}" class="form-control"
+                    <input type="text" name="email" placeholder="{{__('validation.attributes.email')}}"
+                           class="form-control"
                            value="{{request()->get('email')}}">
                 </div>
                 <div class="col-xs-12 col-md-2">
-                    <button type="submit" class="btn btn-success btn-sm btn-block"><i class="fa fa-search"></i> {{__('custom.search')}}
+                    <button type="submit" class="btn btn-success btn-sm btn-block"><i
+                            class="fa fa-search"></i> {{__('custom.search')}}
                     </button>
                 </div>
                 <div class="col-xs-12 col-md-2">
-                    <a href="{{route('activity-logs')}}" class="btn btn-sm btn-default"> {{__('custom.clear')}}</a>
+                    <a href="{{route('admin.activity-logs')}}"
+                       class="btn btn-sm btn-default"> {{__('custom.clear')}}</a>
                 </div>
             </form>
         </div>
@@ -91,7 +95,7 @@
                         <td>{{$causerName}}</td>
                         <td>{{$activity->causer_id}}</td>
                         <td>
-                            <a href="{{route('activity-logs.show',$activity->id)}}"
+                            <a href="{{route('admin.activity-logs.show',$activity->id)}}"
                                class="btn btn-sm btn-info"
                                data-toggle="tooltip"
                                title="{{__('custom.view')}}">

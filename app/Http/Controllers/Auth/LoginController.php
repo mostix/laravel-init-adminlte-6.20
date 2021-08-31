@@ -52,7 +52,14 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $provider = request()->filled('provider') ? request()->get('provider') : "";
+        $guard = request()->filled('guard') ? request()->get('guard') : config('auth')['defaults']['guard'];
+        if (empty($guard) || !isset(config('auth')['guards'][$guard])) {
+            throw ValidationException::withMessages([
+                'active' => [sprintf('auth.no_guard_found', $guard)],
+            ]);
+        }
+        $provider = config('auth')['guards'][$guard]['provider'];
+        $model = config('auth')['providers'][$provider]['model'];
 
         $this->validateLogin($request);
 
@@ -64,15 +71,16 @@ class LoginController extends Controller
 
         // First check if the user is active or
         // has entered a password after the account was created
-        $user = \DB::table($provider.'s')->where('username', $request->username)->first();
-        if($user) {
-            if($user->active == 0) {
+        $user = $model::where('username', $request->username)->first();
+
+        if ($user) {
+            if ($user->active == 0) {
                 $this->incrementLoginAttempts($request);
                 throw ValidationException::withMessages([
                     'active' => [trans('auth.active')],
                 ]);
             }
-            if(!$user->password_changed_at) {
+            if (!$user->password_changed_at) {
                 $this->incrementLoginAttempts($request);
                 throw ValidationException::withMessages([
                     'active' => [trans('auth.password_not_changed')],
@@ -80,13 +88,13 @@ class LoginController extends Controller
             }
         }
 
-        if(\Auth::guard($provider)->attempt([
+        if (\Auth::guard($guard)->attempt([
             'username' => $request->username,
             'password' => $request->password
         ], $request->filled('remember'))) {
 
-            $user = \Auth::guard($provider)->user();
-            \Auth::guard($provider)->login($user);
+            $user = \Auth::guard($guard)->user();
+            \Auth::guard($guard)->login($user);
 
             return redirect()->intended($this->redirectPath());
 

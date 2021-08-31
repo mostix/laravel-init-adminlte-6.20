@@ -1,21 +1,19 @@
 <?php
 
-Route::get('/', ['as' => 'index', 'uses' => 'HomeController@index']);
-Route::name('user-change-password')->get('/auth/password/user-change/{user}', 'UsersController@changePasswordForm');
-Route::name('user-update-password')->post('/auth/password/user-update/{user}', 'UsersController@changePassword');
-Route::name('customer-change-password')->get('/auth/password/customer-change/{customer}', 'CustomersController@changePasswordForm');
-Route::name('customer-update-password')->post('/auth/password/customer-update/{customer}', 'CustomersController@changePassword');
+Route::name('index')->get('/', 'HomeController@index');
+Route::name('user-change-password')->get('/auth/password/user-change/{user}', 'Admin\UsersController@changePasswordForm');
+Route::name('user-update-password')->post('/auth/password/user-update/{user}', 'Admin\UsersController@changePassword');
 
 Auth::routes(['verify' => true]);
 
-Route::group(['middleware' => ['auth:user,customer']], function() {
+Route::group(['middleware' => ['auth:web']], function() {
 
-    Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/toggle-boolean', ['as' => 'toggle-boolean', 'uses' => 'CommonController@toggleBoolean']);
-    Route::get('/permissions-toggle', ['as' => 'toggle-boolean', 'uses' => 'CommonController@togglePermissions']);
+    Route::name('home')->get('/home', 'HomeController@index');
+    Route::name('toggle-boolean')->get('/toggle-boolean', 'CommonController@toggleBoolean');
+    Route::name('toggle-permissions')->get('/toggle-permissions', 'CommonController@togglePermissions');
 });
 
-Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth:user']], function() {
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth:web']], function() {
 
     Route::name('activity-logs')->get('/activity-logs', 'ActivityLogController@index')->middleware('admin');
     Route::name('activity-logs.show')->get('/activity-logs/show/{activity}', 'ActivityLogController@show')->middleware('admin');
@@ -26,4 +24,11 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.', 'mi
     Route::name('users.edit')->get('/users/{user}/edit', 'UsersController@edit')->middleware('admin');
     Route::name('users.update')->post('/users/{user}/update', 'UsersController@update')->middleware('admin');
     Route::name('users.delete')->post('/users/{user}/delete', 'UsersController@destroy')->middleware('admin');
+
+    Route::name('roles')->get('/roles', 'RolesController@index')->middleware('admin');
+    Route::name('roles.create')->get('/roles/create', 'RolesController@create')->middleware('admin');
+    Route::name('roles.store')->post('/roles/store', 'RolesController@store')->middleware('admin');
+    Route::name('roles.edit')->get('/roles/{role}/edit', 'RolesController@edit')->middleware('admin');
+    Route::name('roles.update')->post('/roles/{role}/update', 'RolesController@update')->middleware('admin');
+    Route::name('roles.delete')->post('/roles/{role}/delete', 'RolesController@destroy')->middleware('admin');
 });

@@ -7,7 +7,7 @@
 @section('header')
     <ol class="breadcrumb">
         <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> {{__('custom.home')}}</a></li>
-        <li><a href="{{route('roles')}}"><i class="fa fa-users"></i> {{trans_choice('custom.roles', 2)}}</a></li>
+        <li><a href="{{route('admin.roles')}}"><i class="fa fa-users"></i> {{trans_choice('custom.roles', 2)}}</a></li>
         <li class="active">{{__('custom.add')}} {{trans_choice('custom.roles', 1)}}</li>
     </ol>
 @endsection
@@ -17,7 +17,7 @@
         <div class="box-header with-border">
             <h3 class="box-title my-2">{{__('custom.add')}} {{trans_choice('custom.roles', 1)}}</h3>
 
-            <form action="{{ route('roles.store') }}" method="post" role="form" id="form"
+            <form action="{{ route('admin.roles.store') }}" method="post" role="form" id="form"
                   class="form-horizontal form-groups-bordered">
                 @csrf
 
@@ -34,8 +34,8 @@
 
                 <div class="form-group">
                     <div class="col-md-6 col-md-offset-3">
-                        <button id="save" type="submit" class="btn btn-success">{{ __('custom.button.save') }}</button>
-                        <a href="{{ route('roles') }}"  class="btn btn-primary">{{ __('custom.button.cancel') }}</a>
+                        <button id="save" type="submit" class="btn btn-success">{{ __('custom.save') }}</button>
+                        <a href="{{ route('admin.roles') }}"  class="btn btn-primary">{{ __('custom.cancel') }}</a>
                     </div>
                 </div>
                 <br/>

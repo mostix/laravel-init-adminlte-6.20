@@ -49,6 +49,11 @@ video::-webkit-media-controls-panel {
 .select2-container {
   width: 100% !important;
 }
+.form-check-input {
+    position: relative;
+    top: 2px;
+    margin-right: 2px;
+}
 
 table.dataTable thead th.sorting:after,
 table.dataTable thead th.sorting_asc:after,

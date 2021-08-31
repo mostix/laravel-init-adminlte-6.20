@@ -7,7 +7,7 @@
     <title>{{ config('app.name', 'Tiger') }} :: @yield('title')</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
 
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
@@ -27,11 +27,11 @@
 <!-- Site wrapper -->
 <div class="wrapper">
 
-    @include('partials.header')
+@include('partials.header')
 
-    @include('partials.sidebar')
+@include('partials.sidebar')
 
-    <!-- Content Wrapper. Contains page content -->
+<!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
 

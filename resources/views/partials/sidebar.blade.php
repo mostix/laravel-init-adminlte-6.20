@@ -7,24 +7,24 @@
                     <i class="fa fa-dashboard"></i> <span>{{ __('custom.home') }}</span>
                 </a>
             </li>
-            @if (auth::guard(currentGuard())->user()->hasRole('admin'))
+            @if (Auth::guard(currentGuard())->user()->hasRole('admin'))
                 <li class="header">{{ trans_choice('custom.activity_logs', 1) }}</li>
                 <li @if(strstr(url()->current(), 'activity-logs')) class="active" @endif>
-                    <a href="{{route('activity-logs')}}">
+                    <a href="{{route('admin.activity-logs')}}">
                         <i class="fa fa-clock-o"></i> <span>{{ trans_choice('custom.activity_logs', 2) }}</span>
                     </a>
                 </li>
             @endif
-            @if (auth::guard(currentGuard())->user()->hasRole('admin'))
+            @if (Auth::guard(currentGuard())->user()->hasRole('admin'))
                 <li class="header">Система и потребители</li>
                 <li @if(strstr(url()->current(), 'roles')) class="active" @endif>
-                    <a href="{{route('roles')}}">
+                    <a href="{{route('admin.roles')}}">
                         <i class="fa fa-users"></i> <span>{{ trans_choice('custom.roles', 2) }}</span>
                     </a>
                 </li>
                 <li @if(strstr(url()->current(), 'users')) class="active" @endif>
-                    <a href="{{route('users')}}">
-                        <i class="fa fa-user"></i> <span>Вътрешни потребители</span>
+                    <a href="{{route('admin.users')}}">
+                        <i class="fa fa-user"></i> <span>{{ trans_choice('custom.users', 2) }}</span>
                     </a>
                 </li>
 {{--                <li @if(strstr(url()->current(), 'permissions')) class="active" @endif>--}}

@@ -40,10 +40,11 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <select name="provider" id="provider" class="form-control">
-                <option value="user" @if(old('provider') == 'user') selected @endif>Вътрешен потребител</option>
-                <option value="customer" @if(old('provider') == 'customer') selected @endif>Външен потребител</option>
+        {{--If more then one guard is used in the app use this--}}
+        <div class="form-group hidden">
+            <select name="guard" id="guard" class="form-control">
+                <option value="web" @if(old('guard') == 'web') selected @endif>Вътрешен потребител</option>
+                <option value="customer" @if(old('guard') == 'customer') selected @endif>Външен потребител</option>
             </select>
         </div>
 

@@ -22,7 +22,7 @@
         <h3 class="box-title">{{__('custom.list_with')}} {{ $plural }}</h3>
         <div class="box-tools pull-right">
             @if (Auth::user()->hasRole('admin'))
-                <a href="{{ route('roles.create') }}" class="btn btn-sm btn-success">
+                <a href="{{ route('admin.roles.create') }}" class="btn btn-sm btn-success">
                     {{__('custom.add')}} {{$singular}}
                 </a>
             @endif
@@ -48,18 +48,18 @@
                         <td>{{ $role->created_at }}</td>
                         <td>{{ $role->updated_at }}</td>
                         <td>
-                            <a href="{{route('roles.edit',$role->id)}}"
+                            <a href="{{route('admin.roles.edit',$role->id)}}"
                                class="btn btn-sm btn-warning"
                                data-toggle="tooltip"
                                title="{{__('custom.edit')}}">
                                 <i class="fa fa-edit"></i>
                             </a>
                             <a href="javascript:;"
-                               class="btn btn-sm btn-danger js-toggle-delete-resource-modal hidden"
+                               class="btn btn-sm btn-danger js-toggle-delete-resource-modal"
                                data-target="#modal-delete-resource"
                                data-resource-id="{{ $role->id }}"
                                data-resource-name="{{ $role->title }}"
-                               data-resource-delete-url="{{route('roles.delete',$role->id)}}"
+                               data-resource-delete-url="{{route('admin.roles.delete',$role->id)}}"
                                data-toggle="tooltip"
                                title="{{__('custom.delete')}}">
                                 <i class="fa fa-trash"></i>

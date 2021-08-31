@@ -23,6 +23,8 @@ class User extends Authenticatable
     protected static $logOnlyDirty = true;
     protected static $submitEmptyLogs = false;
 
+    const MODULE_NAME = ('custom.module_users');
+
     /**
      * The attributes that are mass assignable.
      *
@@ -50,43 +52,43 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public static function createRequestValidationRules()
+    public static function createRequestValidationRules($must_change_password)
     {
         $rules = [
             'username'          => ['required', 'string', 'unique:users','max:255'],
             'first_name'        => ['nullable', 'string', 'max:255'],
             'last_name'         => ['nullable', 'string', 'max:255'],
             'email'             => ['required', 'string','unique:users', 'email', 'max:255'],
-//            'password'          => ['required', 'string', 'min:8', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*\d)(?=.*(_|[^\w])).+$/'],
-//            'password_confirmation' => ['required', 'same:password'],
             'role'              =>  ['required'],
         ];
+        if(!$must_change_password) {
+            $rules = [
+                'password'              => ['required', 'string', 'min:8', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*\d)(?=.*(_|[^\w])).+$/'],
+                'password_confirmation' => ['required', 'same:password'],
+            ];
+        }
 
         return $rules;
     }
 
     public static function editRequestValidationRules()
     {
-        $rules = [
-            'username'          => ['required', 'string', 'max:255'],
-            'first_name'        => ['nullable', 'string', 'max:255'],
-            'last_name'         => ['nullable', 'string', 'max:255'],
-            'email'             => ['required', 'string', 'email', 'max:255'],
-            'password'          => ['nullable', 'string', 'min:8', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*\d)(?=.*(_|[^\w])).+$/'],
+        return [
+            'username'              => ['required', 'string', 'max:255'],
+            'first_name'            => ['nullable', 'string', 'max:255'],
+            'last_name'             => ['nullable', 'string', 'max:255'],
+            'email'                 => ['required', 'string', 'email', 'max:255'],
+            'password'              => ['nullable', 'string', 'min:8', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*\d)(?=.*(_|[^\w])).+$/'],
             'password_confirmation' => ['nullable','same:password'],
-            'role'              =>  ['required'],
+            'role'                  =>  ['required'],
         ];
-
-        return $rules;
     }
 
     public static function passwordRequestValidationRules()
     {
-        $rules = [
-            'password'          => ['required', 'string', 'min:8', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*\d)(?=.*(_|[^\w])).+$/'],
+        return [
+            'password'              => ['required', 'string', 'min:8', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*\d)(?=.*(_|[^\w])).+$/'],
             'password_confirmation' => ['required','same:password']
         ];
-
-        return $rules;
     }
 }

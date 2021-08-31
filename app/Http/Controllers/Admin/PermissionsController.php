@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\User;
 use Illuminate\View\View;
 use Spatie\Permission\Models\Permission;
+use App\Http\Controllers\Controller;
 
 class PermissionsController extends Controller
 {
@@ -17,7 +18,7 @@ class PermissionsController extends Controller
     {
         $users = User::where('active', 1)->orderBy('name', 'asc')->get();
         $permissions = Permission::all()->pluck('name');
-        if(!$permissions) $permissions = [];
+        if (!$permissions) $permissions = [];
 
         return view('permissions.index', compact('users', 'permissions'));
     }

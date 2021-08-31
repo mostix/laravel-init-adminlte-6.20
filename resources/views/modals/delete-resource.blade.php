@@ -5,7 +5,8 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">
-                    <i class="fa fa-exclamation"></i>  {{__('custom.remove')}}  {{$resource}} <span class="resource-name"></span>
+                    <i class="fa fa-exclamation"></i> {{__('custom.remove')}}  {{$resource}} <span
+                        class="resource-name"></span>
                 </h4>
             </div>
             <div class="modal-body">
@@ -17,9 +18,11 @@
                 <form method="POST" action="" class="pull-left mr-4">
                     @csrf
                     <input name="id" value="" id="resource_id" type="hidden">
-                    <button type="submit" class="btn btn-danger js-delete-resource"> <i class="fa fa-ban"></i>&nbsp; {{__('custom.button.delete')}} {{strtoupper($resource)}}</button>
+                    <button type="submit" class="btn btn-danger js-delete-resource"><i
+                            class="fa fa-ban"></i>&nbsp; {{__('custom.delete')}} {{strtoupper($resource)}}</button>
                 </form>
-                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">{{__('custom.button.cancel')}}</button>
+                <button type="button" class="btn btn-default pull-left"
+                        data-dismiss="modal">{{__('custom.cancel')}}</button>
             </div>
         </div>
         <!-- /.modal-content -->
